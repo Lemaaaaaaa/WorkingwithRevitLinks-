@@ -22,7 +22,7 @@ Together, these scripts provide efficient tools for controlling visibility and d
 
 ### Purpose
 
-This script allows users to copy specific elements from selected linked Revit documents into the current project. It’s particularly useful when you need to reference structural elements from linked models, such as beams, columns, or foundations, in the active project environment.
+This script allows users to copy specific elements from selected linked Revit documents into the current project at the same location. It’s particularly useful when you need to copy structural elements from linked models, such as beams, columns, or foundations, into the active project environment. The script can be modified to include other elements.
 
 ### Workflow
 
