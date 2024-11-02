@@ -50,7 +50,9 @@ selected_link_name = forms.SelectFromList.show(
 
 # Filter and copy elements
 element_ids = [link_instance.GetTypeId() for link_instance in selected_link_instances]
-ElementTransformUtils.CopyElements(linkedDoc, element_ids, doc, transform, None)
+ElementTransformUtils.CopyElements(linkedDoc, element_ids, doc, transform, None) ```
+
+---
 
 ## Script 2: Hide Selected Linked Models
 
