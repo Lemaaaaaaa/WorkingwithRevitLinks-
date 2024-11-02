@@ -50,47 +50,9 @@ selected_link_name = forms.SelectFromList.show(
 
 # Filter and copy elements
 element_ids = [link_instance.GetTypeId() for link_instance in selected_link_instances]
-ElementTransformUtils.CopyElements(linkedDoc, element_ids, doc, transform, None) ```
-
+ElementTransformUtils.CopyElements(linkedDoc, element_ids, doc, transform, None)
+```
 ---
-Script 2: Hide Selected Linked Models
-Purpose
-This script allows users to hide specific linked Revit documents in the active view. It’s useful for managing the visual layout of views where certain linked models (like structural or architectural links) need to be temporarily hidden.
-
-Workflow
-Collect Linked Documents: The script gathers all linked models in the active document.
-User Selection of Links to Hide: A dialog box allows the user to select links to hide from the view.
-Hide Elements in Active View: Using View.HideElements, the script hides the selected link elements from the current view.
-Transaction Management: The hide action is committed within a transaction, ensuring that changes are reversible if needed.
-Key Methods
-View.HideElements: Hides selected elements in the current view.
-GetTypeId: Retrieves the type ID of each selected link instance to hide.
-Code Example
-python
-Copy code
-import clr
-clr.AddReference('RevitAPI')
-clr.AddReference('RevitAPIUI')
-
-from Autodesk.Revit.DB import *
-from Autodesk.Revit.UI import *
-from pyrevit import forms
-from System.Collections.Generic import List
-
-doc = __revit__.ActiveUIDocument.Document
-active_view = doc.ActiveView
-
-# Collect linked documents
-linkInstances = FilteredElementCollector(doc).OfClass(RevitLinkInstance).ToElements()
-
-# User selection of links
-selected_link_name = forms.SelectFromList.show(
-    link_options.keys(), title='Select Revit Links', width=500, height=400, button_name='Select Links', multiselect=True
-)
-
-# Hide selected links in the active view
-linksIds = [link_instance.GetTypeId() for link_instance in selected_link_instances]
-active_view.HideElements(List[ElementId](linksIds))
 
 ## Script 2: Hide Selected Linked Models
 
