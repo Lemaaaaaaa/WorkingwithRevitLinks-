@@ -144,7 +144,7 @@ Each script relies on similar key Revit API libraries and classes. Here’s a su
 - **ElementTransformUtils**: Enables copying of elements across documents.
 - **View.HideElements** and **View.UnhideElements** : Enables copying of elements across documents.
 
-### pyRevit.forms:
+### pyRevit.forms
 
 - **forms.SelectFromList.show**: Creates user selection dialogs for choosing links and categories.
 
