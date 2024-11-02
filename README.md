@@ -83,4 +83,69 @@ selected_link_name = forms.SelectFromList.show(
 
 linksIds = [link_instance.GetTypeId() for link_instance in selected_link_instances]
 active_view.HideElements(List[ElementId](linksIds))
+```
+---
+
+## Script 3: Unhide Selected Linked Models
+
+### Purpose
+
+This script enables users to unhide specific linked Revit documents in the active view. It’s particularly useful for restoring visibility of links that were previously hidden, allowing for flexible control of linked model visibility on a view-by-view basis.
+
+### Workflow
+
+1. **Collect Linked Documents**: Like the previous scripts, this script collects all linked Revit models in the current project.
+2. **User Selection of Links to uHide:**: A dialog box allows the user to select links to unhide from the view.
+3. **Unhide Elements in Active View**: Using View.UnhideElements, the script hides the selected link elements from the current view.
+4. **Transaction Management**: The filtered elements are copied into the current project, maintaining their original positions.
+
+### Key Methods
+
+- `View.UnhideElements`: Unhides selected elements in the current view.
+- `GetTypeId`: Retrieves the element ID of each selected link instance to hide.
+
+### Code Example
+
+```python
+import clr
+clr.AddReference('RevitAPI')
+clr.AddReference('RevitAPIUI')
+
+from Autodesk.Revit.DB import *
+from Autodesk.Revit.UI import *
+from pyrevit import forms
+from System.Collections.Generic import List
+
+doc = __revit__.ActiveUIDocument.Document
+active_view = doc.ActiveView
+
+# Collect linked documents
+linkInstances = FilteredElementCollector(doc).OfClass(RevitLinkInstance).ToElements()
+
+# User selection of links
+selected_link_name = forms.SelectFromList.show(
+    link_options.keys(), title='Select Revit Links', width=500, height=400, button_name='Select Links', multiselect=True
+)
+
+# Unhide selected links in the active view
+linksIds = [link_instance.GetTypeId() for link_instance in selected_link_instances]
+active_view.UnhideElements(List[ElementId](linksIds))
+```
+---
+
+## Key Libraries and Classes
+
+Each script relies on similar key Revit API libraries and classes. Here’s a summary of the primary resources used across all three scripts:
+
+### Autodesk.Revit.DB
+
+- **FilteredElementCollector**: Used to collect linked Revit documents.
+- **Transaction**: Ensures that hide operations are committed safely.
+- **ElementTransformUtils**: Enables copying of elements across documents.
+- **View.HideElements** and **View.UnhideElements** : Enables copying of elements across documents.
+
+### pyRevit.forms:
+
+- **forms.SelectFromList.show**: Creates user selection dialogs for choosing links and categories.
+
 
